@@ -1,0 +1,22 @@
+name: great-work
+
+on:
+  pull_request:
+    branches:
+    - master
+    types:
+    - closed
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: "merged-filter"
+      uses: "actions/bin/filter@master"
+      with:
+        args: merged true
+    - name: echo-great-work
+      run: |
+        echo Great Work
