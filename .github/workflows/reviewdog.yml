@@ -1,16 +1,22 @@
 ---
 name: reviewdog
-on:
-  pull_request:
+on: [pull_request]
 jobs:
   reviewdog:
     name: Run reviewdog
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: install tools
+      - name: Set up Go
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.12
+        id: go
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      - name: Run reviewdog
         run: |
-          which make
-      - name: run reviewdog
-        run: |
+          go version
+          echo make bootstrap-lint-tools
           echo REVIEWDOG_ARG="-reporter=github-pr-review" make reviewdog
