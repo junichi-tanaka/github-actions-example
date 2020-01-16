@@ -19,7 +19,7 @@ jobs:
         args: merged true
     - uses: actions/github-script@0.2.0
       with:
-        github-token: ${{github.token}}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           github.issues.createComment({...context.issue, body: '👋 Thanks for your efforts!'})
     - name: echo-great-work
