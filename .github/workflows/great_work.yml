@@ -13,15 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: "merged-filter"
-      uses: "actions/bin/filter@master"
-      with:
-        args: merged true
     - uses: actions/github-script@0.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           github.issues.createComment({...context.issue, body: '👋 Thanks for your efforts!'})
-    - name: echo-great-work
-      run: |
-        echo Great Work
+      if: github.event.pull_request.merged
