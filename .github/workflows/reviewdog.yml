@@ -1,0 +1,16 @@
+---
+name: reviewdog
+on:
+  pull_request:
+jobs:
+  reviewdog:
+    name: Run reviewdog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install tools
+        run: |
+          which make
+      - name: run reviewdog
+        run: |
+          echo REVIEWDOG_ARG="-reporter=github-pr-review" make reviewdog
